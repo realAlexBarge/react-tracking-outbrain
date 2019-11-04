@@ -14,12 +14,27 @@ npm install react-tracking-outbrain --save
 
 # Usage
 
-### With npm
-
-Initializing OutbrainTracking and tracking pageviews:
+Before tracking any page views or events the tracker needs to be imported and initialized with the custom tracking id:
 
 ```js
 import OutbrainTracking from 'react-tracking-outbrain';
 OutbrainTracking.initialize('TRACKING_ID');
-OutbrainTracking.pageview();
+```
+
+After initializing page views can be tracked like this:
+
+```js
+OutbrainTracking.trackPageview();
+```
+
+There is also the option to track custom events with event action:
+
+```js
+OutbrainTracking.trackEvent(eventAction);
+```
+
+There is also a method to expose the raw obApi tracking function from the window:
+
+```js
+OutbrainTracking.getTracker();
 ```
