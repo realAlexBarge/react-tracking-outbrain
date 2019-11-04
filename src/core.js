@@ -39,11 +39,21 @@ export function initialize(newTrackerId) {
   /* eslint-enable */
 }
 
-export function pageview() {
-  window.obApi('track', 'PAGE_VIEW');
+export function getTracker() {
+  return window.obApi;
+}
+
+export function trackPageview() {
+  window.obApi('track', '');
+}
+
+export function trackEvent(eventAction = '') {
+  window.obApi('track', eventAction);
 }
 
 export default {
   initialize,
-  pageview,
+  getTracker,
+  trackPageview,
+  trackEvent,
 };

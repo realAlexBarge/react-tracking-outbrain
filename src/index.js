@@ -1,6 +1,8 @@
-import { initialize, pageview } from './core';
+import { initialize, getTracker, trackPageview, trackEvent } from './core';
 
 export default {
   initialize,
-  pageview,
+  getTracker,
+  trackPageview,
+  trackEvent,
 };
