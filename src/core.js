@@ -44,11 +44,11 @@ export function getTracker() {
 }
 
 export function trackPageview() {
-  window.obApi('track', '');
+  window.obApi('track', 'PAGE_VIEW');
 }
 
-export function trackEvent(eventAction = '') {
-  window.obApi('track', eventAction);
+export function trackEvent(eventAction) {
+  if (eventAction) window.obApi('track', eventAction);
 }
 
 export default {
