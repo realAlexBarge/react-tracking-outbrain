@@ -29,7 +29,9 @@
     "outbrain",
     "tracking",
     "npm",
-    "javascript"
+    "javascript",
+    "wrapper",
+    "pixel"
   ],
   "author": "Alexander Barge <alexander.barge@gmail.com>",
   "license": "MIT",
