@@ -12,6 +12,10 @@
     "build": "cross-env BABEL_ENV=production babel src --out-dir lib",
     "prepare": "npm run clean && npm run test && npm run build"
   },
+  "engines": {
+    "node": ">=8.0.0",
+    "npm": ">=6.0.0"
+  },
   "files": [
     "lib",
     "src"
