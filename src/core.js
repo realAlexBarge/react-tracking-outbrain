@@ -5,6 +5,18 @@
  * @author Alexander Barge <alexander.barge@gmail.com>
  */
 
+export function getTracker() {
+  return window.obApi;
+}
+
+export function trackPageview() {
+  window.obApi('track', 'PAGE_VIEW');
+}
+
+export function trackEvent(eventAction) {
+  if (eventAction) window.obApi('track', eventAction);
+}
+
 export function initialize(newTrackerId) {
   /* eslint-disable */
   !(function(_window, _document) {
@@ -37,18 +49,7 @@ export function initialize(newTrackerId) {
     script.parentNode.insertBefore(tag, script);
   })(window, document);
   /* eslint-enable */
-}
-
-export function getTracker() {
-  return window.obApi;
-}
-
-export function trackPageview() {
-  window.obApi('track', 'PAGE_VIEW');
-}
-
-export function trackEvent(eventAction) {
-  if (eventAction) window.obApi('track', eventAction);
+  trackPageview();
 }
 
 export default {
