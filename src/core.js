@@ -5,51 +5,72 @@
  * @author Alexander Barge <alexander.barge@gmail.com>
  */
 
+const { obApi } = window;
+
 export function getTracker() {
-  return window.obApi;
+  return obApi;
 }
 
 export function trackPageview() {
-  window.obApi('track', 'PAGE_VIEW');
+  try {
+    if (typeof obApi === 'function') {
+      obApi('track', 'PAGE_VIEW');
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn(e);
+  }
 }
 
 export function trackEvent(eventAction) {
-  if (eventAction) window.obApi('track', eventAction);
+  try {
+    if (typeof obApi === 'function' && eventAction) {
+      obApi('track', eventAction);
+    }
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn(e);
+  }
 }
 
 export function initialize(newTrackerId) {
-  /* eslint-disable */
-  !(function(_window, _document) {
-    var OB_ADV_ID = newTrackerId;
-    if (_window.obApi) {
-      var toArray = function(object) {
-        return Object.prototype.toString.call(object) === '[object Array]'
-          ? object
-          : [object];
-      };
-      _window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(
-        toArray(OB_ADV_ID),
-      );
-      return;
-    }
-    var api = (_window.obApi = function() {
-      api.dispatch
-        ? api.dispatch.apply(api, arguments)
-        : api.queue.push(arguments);
-    });
-    api.version = '1.1';
-    api.loaded = true;
-    api.marketerId = OB_ADV_ID;
-    api.queue = [];
-    var tag = _document.createElement('script');
-    tag.async = true;
-    tag.src = '//amplify.outbrain.com/cp/obtp.js';
-    tag.type = 'text/javascript';
-    var script = _document.getElementsByTagName('script')[0];
-    script.parentNode.insertBefore(tag, script);
-  })(window, document);
-  /* eslint-enable */
-  trackPageview();
+  try {
+    /* eslint-disable */
+    !(function(_window, _document) {
+      var OB_ADV_ID = newTrackerId;
+      if (_window.obApi) {
+        var toArray = function(object) {
+          return Object.prototype.toString.call(object) === '[object Array]'
+            ? object
+            : [object];
+        };
+        _window.obApi.marketerId = toArray(_window.obApi.marketerId).concat(
+          toArray(OB_ADV_ID),
+        );
+        return;
+      }
+      var api = (_window.obApi = function() {
+        api.dispatch
+          ? api.dispatch.apply(api, arguments)
+          : api.queue.push(arguments);
+      });
+      api.version = '1.1';
+      api.loaded = true;
+      api.marketerId = OB_ADV_ID;
+      api.queue = [];
+      var tag = _document.createElement('script');
+      tag.async = true;
+      tag.src = '//amplify.outbrain.com/cp/obtp.js';
+      tag.type = 'text/javascript';
+      var script = _document.getElementsByTagName('script')[0];
+      script.parentNode.insertBefore(tag, script);
+    })(window, document);
+    /* eslint-enable */
+    trackPageview();
+  } catch (e) {
+    // eslint-disable-next-line no-console
+    console.warn(e);
+  }
 }
 
 export default {
