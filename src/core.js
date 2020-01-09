@@ -66,7 +66,6 @@ export function initialize(newTrackerId) {
       script.parentNode.insertBefore(tag, script);
     })(window, document);
     /* eslint-enable */
-    trackPageview();
   } catch (e) {
     // eslint-disable-next-line no-console
     console.warn(e);
